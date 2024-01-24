@@ -22,7 +22,7 @@ router.get('/',(req,res)=>{
                         dateandtime:doc.quantity,
                     request:{
                         method:"GET",
-                        url:'https://localhost:3000/cart/'+doc._id
+                        url:'https://product-api-3trd.onrender.com/cart/'+doc._id
                     }}})  
                      }       
                   }
@@ -55,7 +55,7 @@ router.post('/',(req,res)=>{
             res.status(200).json({message:"Add in Cart",
         result:{
             Method:"GET",
-            URL:"http://localhost:4000/cart/"+result._id
+            URL:"https://product-api-3trd.onrender.com/cart/"+result._id
         }})
         })
     }
@@ -87,7 +87,7 @@ router.get('/:cartid',(req,res)=>{
                     },
                     request:{
                             Method:"GET",
-                            url:"https://localhost:4000/cart"
+                            url:"https://product-api-3trd.onrender.com/cart"
                     }
                 }
             });
@@ -116,7 +116,7 @@ router.delete('/:cartItemId', (req, res) => {
             cart:carts,
             request:{
                 Method:"GET",
-                url:"https://localhost:4000/cart"
+                url:"https://product-api-3trd.onrender.com/cart"
             }
         })
     }

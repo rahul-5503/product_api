@@ -59,14 +59,14 @@ router.get('/:orderid',(req,res)=>{
                         product: {
                           productId:orderEntry.productId,
                           Method:"GET",
-                          Url:"http://localhost:4000/product/productid/"+orderEntry.productId._id
+                          Url:"https://product-api-3trd.onrender.com/product/productid/"+orderEntry.productId._id
                         },//it return all the values in the product
                         cart:{cartId: orderEntry.cartId },
                         createdAt: orderEntry.dateandtime,
                     },
                     request:{
                             Method:"GET",
-                            url:"https://localhost:4000/order"
+                            url:"https://product-api-3trd.onrender.comorder/order"
                     }
                 }
             });

@@ -7,7 +7,7 @@ const product= new mongoose.Schema({
     category:{type:String,required:true},//category to which this product belongs(E g., Electronics/Clothing)
     price:{type:Number,required:true},//price of the product in $
     discounted_price:{type:Number},//discounted price if any
-  //  images:[{url:String,require:true}],//array of image urls for the products
+    images:[{url:String,require:true}],//array of image urls for the products
 })
 
 module.exports=mongoose.model("product",product);

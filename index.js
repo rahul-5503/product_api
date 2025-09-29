@@ -6,8 +6,12 @@ const userrouter = require('./routes/userrouter');
 const orderrouter=require('./routes/orderrout');
 const cartrout =require('./routes/cartrout');
 var bodyparser = require('body-parser')
-var app = express();
+const cors = require('cors'); // ✅ import cors
 
+const app = express();
+
+// Enable CORS for all routes
+app.use(cors());
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:false}));
 

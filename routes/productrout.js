@@ -199,7 +199,7 @@ router.patch('/update/:id/:description/:price/:discounted_price/:images/:stock',
      price :req.params.price,
     discounted_price : req.params.discounted_price,
     images: req.params.images,
-    stock: req.params.images
+    stock: req.params.stock
     }
     console.log(updatedproduct);
     Product

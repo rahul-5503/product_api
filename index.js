@@ -5,6 +5,7 @@ const productrout =require('./routes/productrout');
 const userrouter = require('./routes/userrouter');
 const orderrouter=require('./routes/orderrout');
 const cartrout =require('./routes/cartrout');
+const categoryrout =require('./routes/categoryrout');
 var bodyparser = require('body-parser')
 const cors = require('cors'); // ✅ import cors
 
@@ -26,3 +27,4 @@ app.use('/product', productrout);
 app.use('/cart',cartrout);
 app.use('/user',userrouter)
 app.use('/order',orderrouter);
+app.use('/category', categoryrout);

@@ -8,6 +8,7 @@ const connection = async () =>{
    }
    catch(error){
        console.log("error in connecting",error.message);
+       process.exit(1); 
    }
    }
 

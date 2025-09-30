@@ -11,7 +11,8 @@ router.post('/',(req,res)=>{
         price         : req.body.price,
         discount_price: req.body.discount_price,
         category      : req.body.category,
-         // imageUrl: req.file.path  //image path from multer middleware
+        images:  req.body.images || [], 
+        stock        : req.body.stock
     })
     productre.save()
     .then(result =>{
@@ -25,7 +26,7 @@ router.post('/',(req,res)=>{
 
 router.get('/',(req,res)=>{
       Product.find()
-      .select(' _id name description price discount_price category')
+      .select(' _id name description price discount_price category images stock')
       .exec()
       .then(result =>{
         const output={
@@ -37,7 +38,9 @@ router.get('/',(req,res)=>{
                     description:doc.description,
                     category:doc.category,
                     price:doc.price,
-                    discount_price:doc.discounted_price
+                    discount_price:doc.discounted_price,
+                    images:doc.images || [],
+                    stock:doc.stock
                 }})     
         }
         res.status(200).json({
@@ -55,7 +58,7 @@ router.get('/productid/:id', (req, res) => {
 
     Product
         .findOne({ _id: productId })
-        .select('_id name description price discounted_price category')
+        .select('_id name description price discounted_price category images stock')
         .exec()
         .then(product => {
             if (product) {
@@ -67,7 +70,9 @@ router.get('/productid/:id', (req, res) => {
                             description: product.description,
                             category: product.category,
                             price: product.price,
-                            discounted_price: product.discounted_price
+                            discounted_price: product.discounted_price,
+                            images: product.images || [],
+                            stock:product.stock
                         }
                     }
                 });
@@ -86,7 +91,7 @@ router.get('/category/:name', (req, res) => {
    
     Product
         .find({ category: category })
-        .select('_id name description price discounted_price category')
+        .select('_id name description price discounted_price category images stock')
         .exec()
         .then(product => {
             if (product.length >0) {
@@ -98,7 +103,9 @@ router.get('/category/:name', (req, res) => {
                             description: product.description,
                             category: product.category,
                             price: product.price,
-                            discounted_price: product.discounted_price
+                            discounted_price: product.discounted_price,
+                            images:product.images || [],
+                            stock:product.stock
                         }))
                     }
                 });
@@ -120,7 +127,7 @@ router.get('/name/:name', (req, res) => {
 
     Product
         .find({ name: { $regex: regexPattern } })
-        .select('i_d name description price discounted_price category')
+        .select('_id name description price discounted_price category images stock')
         .exec()
         .then(products => {
             if (products.length > 0) {
@@ -132,7 +139,9 @@ router.get('/name/:name', (req, res) => {
                             description: product.description,
                             category: product.category,
                             price: product.price,
-                            discounted_price: product.discounted_price
+                            discounted_price: product.discounted_price,
+                            images:product.images || [],
+                            stock:product.stock
                         }))
                     }
                 });
@@ -155,7 +164,7 @@ router.get('/name/:name/:value', (req, res) => {
     Product
         .find({ name: { $regex: regexPattern },
         price:{$lt:value} })
-        .select('_id name description price discounted_price category')
+        .select('_id name description price discounted_price category images stock')
         .exec()
         .then(products => {
             if (products.length > 0) {
@@ -167,7 +176,9 @@ router.get('/name/:name/:value', (req, res) => {
                             description: product.description,
                             category: product.category,
                             price: product.price,
-                            discounted_price: product.discounted_price
+                            discounted_price: product.discounted_price,
+                            images: product.images || [],
+                            stock:product.stock
                         }))
                     }
                 });
@@ -192,7 +203,7 @@ router.patch('/update/:id/:description/:price/:discounted_price', (req, res) => 
     Product
         .findByIdAndUpdate(productId,
         updatedproduct,{new:true} )
-        .select('_id name description price discounted_price category')
+        .select('_id name description price discounted_price category images stock')
         .exec()
         .then(product => {
             if (product) {
@@ -204,7 +215,9 @@ router.patch('/update/:id/:description/:price/:discounted_price', (req, res) => 
                             description: product.description,
                             category: product.category,
                             price: product.price,
-                            discounted_price: product.discounted_price
+                            discounted_price: product.discounted_price,
+                            images: product.images || [],
+                            stock:product.stock
                         },
                         message:"updated successfully"
                     }
@@ -222,7 +235,7 @@ router.patch('/update/:id/:description/:price/:discounted_price', (req, res) => 
 router.delete('/delete/:productid',(req,res)=>{
     const productID=req.params.productid;
     Product.findByIdAndDelete(productID)
-    .select('id name description price discounted_price category')
+    .select('id name description price discounted_price category images stock')
     .exec()
     .then(deletedProduct => {
         if (deletedProduct) {

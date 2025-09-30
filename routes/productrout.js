@@ -192,12 +192,14 @@ router.get('/name/:name/:value', (req, res) => {
         });
 });
 
-router.patch('/update/:id/:description/:price/:discounted_price', (req, res) => {
+router.patch('/update/:id/:description/:price/:discounted_price/:images/:stock', (req, res) => {
     const productId = req.params.id;
     const updatedproduct ={
     description: req.params.description,
      price :req.params.price,
-    discounted_price : req.params.discounted_price
+    discounted_price : req.params.discounted_price,
+    images: req.params.images,
+    stock: req.params.images
     }
     console.log(updatedproduct);
     Product

@@ -12,7 +12,7 @@ router.post('/',(req,res)=>{
         discount_price: req.body.discount_price,
         category      : req.body.category,
         images:  req.body.images || [], 
-        stock        : req.body.stock
+        stock        : req.body.stock 
     })
     productre.save()
     .then(result =>{
@@ -40,7 +40,7 @@ router.get('/',(req,res)=>{
                     price:doc.price,
                     discount_price:doc.discounted_price,
                     images:doc.images || [],
-                    stock:doc.stock
+                    stock:doc.stock || 0
                 }})     
         }
         res.status(200).json({
@@ -72,7 +72,7 @@ router.get('/productid/:id', (req, res) => {
                             price: product.price,
                             discounted_price: product.discounted_price,
                             images: product.images || [],
-                            stock:product.stock
+                            stock:product.stock || 0
                         }
                     }
                 });
@@ -105,7 +105,7 @@ router.get('/category/:name', (req, res) => {
                             price: product.price,
                             discounted_price: product.discounted_price,
                             images:product.images || [],
-                            stock:product.stock
+                            stock:product.stock || 0
                         }))
                     }
                 });
@@ -141,7 +141,7 @@ router.get('/name/:name', (req, res) => {
                             price: product.price,
                             discounted_price: product.discounted_price,
                             images:product.images || [],
-                            stock:product.stock
+                            stock:product.stock || 0
                         }))
                     }
                 });
@@ -178,7 +178,7 @@ router.get('/name/:name/:value', (req, res) => {
                             price: product.price,
                             discounted_price: product.discounted_price,
                             images: product.images || [],
-                            stock:product.stock
+                            stock:product.stock || 0
                         }))
                     }
                 });
@@ -219,7 +219,7 @@ router.patch('/update/:id', (req, res) => {
                             price: product.price,
                             discounted_price: product.discounted_price,
                             images: product.images || [],
-                            stock:product.stock
+                            stock:product.stock || 0
                         },
                         message:"updated successfully"
                     }

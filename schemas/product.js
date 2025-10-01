@@ -8,6 +8,7 @@ const product= new mongoose.Schema({
     price:{type:Number,required:true},//price of the product in $
     discounted_price:{type:Number},//discounted price if any
     images:[{type: String}],//array of image urls for the products
+    stock:{type:Number},
 })
 
 module.exports=mongoose.model("product",product);

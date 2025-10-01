@@ -26,7 +26,7 @@ router.post('/',(req,res)=>{
 
 router.get('/',(req,res)=>{
       Product.find()
-      .select(' _id name description price discount_price category images stock')
+      .select(' _id name description price discount_price category images stock createdAt')
       .exec()
       .then(result =>{
         const output={
@@ -40,7 +40,8 @@ router.get('/',(req,res)=>{
                     price:doc.price,
                     discount_price:doc.discounted_price,
                     images:doc.images || [],
-                    stock:doc.stock || 0
+                    stock:doc.stock || 0 ,
+                    createdAt:doc.createdAt
                 }})     
         }
         res.status(200).json({
@@ -58,7 +59,7 @@ router.get('/productid/:id', (req, res) => {
 
     Product
         .findOne({ _id: productId })
-        .select('_id name description price discounted_price category images stock')
+        .select('_id name description price discounted_price category images stock createdAt')
         .exec()
         .then(product => {
             if (product) {
@@ -72,7 +73,8 @@ router.get('/productid/:id', (req, res) => {
                             price: product.price,
                             discounted_price: product.discounted_price,
                             images: product.images || [],
-                            stock:product.stock || 0
+                            stock:product.stock || 0 ,
+                            createdAt:product.createdAt
                         }
                     }
                 });
@@ -91,7 +93,7 @@ router.get('/category/:name', (req, res) => {
    
     Product
         .find({ category: category })
-        .select('_id name description price discounted_price category images stock')
+        .select('_id name description price discounted_price category images stock createdAt')
         .exec()
         .then(product => {
             if (product.length >0) {
@@ -105,7 +107,8 @@ router.get('/category/:name', (req, res) => {
                             price: product.price,
                             discounted_price: product.discounted_price,
                             images:product.images || [],
-                            stock:product.stock || 0
+                            stock:product.stock || 0 ,
+                            createdAt:product.createdAt
                         }))
                     }
                 });
@@ -127,7 +130,7 @@ router.get('/name/:name', (req, res) => {
 
     Product
         .find({ name: { $regex: regexPattern } })
-        .select('_id name description price discounted_price category images stock')
+        .select('_id name description price discounted_price category images stock createdAt')
         .exec()
         .then(products => {
             if (products.length > 0) {
@@ -141,7 +144,8 @@ router.get('/name/:name', (req, res) => {
                             price: product.price,
                             discounted_price: product.discounted_price,
                             images:product.images || [],
-                            stock:product.stock || 0
+                            stock:product.stock || 0 ,
+                            createdAt:product.createdAt
                         }))
                     }
                 });
@@ -164,7 +168,7 @@ router.get('/name/:name/:value', (req, res) => {
     Product
         .find({ name: { $regex: regexPattern },
         price:{$lt:value} })
-        .select('_id name description price discounted_price category images stock')
+        .select('_id name description price discounted_price category images stock createdAt')
         .exec()
         .then(products => {
             if (products.length > 0) {
@@ -178,7 +182,8 @@ router.get('/name/:name/:value', (req, res) => {
                             price: product.price,
                             discounted_price: product.discounted_price,
                             images: product.images || [],
-                            stock:product.stock || 0
+                            stock:product.stock || 0,
+                            createdAt:product.createdAt
                         }))
                     }
                 });

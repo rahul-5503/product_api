@@ -64,7 +64,7 @@ router.get('/productid/:id', (req, res) => {
         .then(product => {
             if (product) {
                 res.status(200).json({
-                        product: {
+                         
                             id: product._id,
                             name: product.name,
                             description: product.description,
@@ -74,7 +74,7 @@ router.get('/productid/:id', (req, res) => {
                             images: product.images || [],
                             stock:product.stock || 0 ,
                             createdAt:product.createdAt
-                        }
+                        
                 });
             } else {
                 res.status(404).json({ message: "No valid entry found for the provided ID." });
